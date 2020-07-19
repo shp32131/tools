@@ -65,13 +65,30 @@
       + 先由`git log`指令获取版本号 
     - `git reset --soft` 保留工作区的内容,把文件差异放进暂存区  
 ### 分支管理 
+- 分支用于为项目增加新功能或修复Bug时使用 
 - 分支说明: 
   + `master` 主分支,有且只有一个  
   + `release` 是线上版本分支,线上版本发布后,会将`release`合并到`master`  
   + `develop` 开发分支,通常给测试部署环境或打包的分支,每个成员在自己分支开发完成后,向`develop`分支合并   
   + `feature` 功能分支或个人分支,有多个,`merge`完成后会删除   
+- 分支操作  
+  + `git branch dev ` 创建分支 
+  + `git branch ` 查看分支 
+  + `git checkout dev` 切换分支 
+  + `git checkout -b feature/xxx` 创建并切换到分支 
+  + `git checkout master,git merge dev` 合并`dev`分支到`master` 
+  + `git branch -d dev ` 删除分支 
+  + `git branch -D dev ` 删除没有合并的分支 
+  + `git push origin :dev` 删除远程仓库分支 
+  + `git branch --no-merged` (在`master`分支上)查看未合并的分支 
+  + `git branch --merged` (在`master`分支上)查看已经合并的分支 
 
 ### 日志查看 
+- `git log` 查看日志 
+- `git log -p -2` 查看最近2次提交日志并显示文件差异  
+- `git log --name-only` 显示已修改的文件清单 
+- `git log --name-status` 显示新增,修改,删除的文件清单 
+- `git log --name-oneline` 一行显示并只显示SHA-1的前几个字符 
 
 ### 效率提升 
 
@@ -91,6 +108,65 @@
   + `git pull origin master` 当`hint: not have locally...`
   + `git pull --allow-unrelated-histories` 当`refusing to merge unrelated histories...`
 
-- 5.删除远程仓库关联 `git remote rm origin`
+- 5.删除远程仓库关联 `git remote rm origin` 
+
+### pull
+- 远程拉取主机某个分支的更新,再与本地的指定分支合并 
+  + `git pull origin ask:ask`
+  + `git pull origin ask`
+  + `git pull`
+
+### push
+- `git push` 指令用于将本地分支的更新推送到远程主机 
+  + `git push origin` 将当前分支推送到`origin`主机对应的分支(当前只有一个分支可以省略主支名) 
+  + `git push -u origin master` `-u` 选项指定一个默认主机,以后就可以不加参数直接使用`git push`
+  + `git push origin --delete ask` 删除远程ask分支 
+  + `git push origin --set-upstream origin ask` 本地ask分支关联远程分支并推送 
+
+### .gitignore 
+- `.gitignore`用于过虑提交的文件,比如`node_modules/`  
+- 配置文件是从上到下进行规则匹配的,如果上面的范围大,下面的规则将不生效...
+- 配置语法 
+  + `/` 表示目录 
+  + `*` 通配多个字符 
+  + `?` 通配单个字符 
+  + `[]` 间个字符的匹配列表 
+  + `!` 表示不过虑
+```shell
+# file_name ---.gitignore
+node_modules/* # 表示 过虑node_modules/ 或 /node_modules/* 文件夹里的所有文件 
+/node_modules/* # 过虑根目录下/node_modules/所有文件 
+
+```
+
+### Tag 
+- `git` 可以对某一时间点上的版本打上标签,用于发布软件版本,如 v1.0 
+  + `git tag v1.0` 添加标签  
+  + `git tag` 列出标签 
+  + `git push --tags` 推送标签 
+  + `git tag -d v1.0` 删除标签 
+  + `git push origin :v1.0.1` 删除远程仓库标签 
+
+### 打包发布 
+- `git archive master --prefix='hansan'  --format=zip > hansan.zip`
+  + 对于`master`分支代码生成压缩包供使用者下载使用,`--prefix` 指定目录名  
+
+### Stashing 
+当你正在进行项目中某一部分的工作，里面的东西处于一个比较杂乱的状态，而你想转到其他分支上进行一些工作
+问题是，你不想提交进行了一半的工作，否则以后你无法回到这个工作点。
+
+"暂存" 可以获取你工作目录的中间状态——也就是你修改过的被追踪的文件和暂存的变更
+并将它保存到一个未完结变更的堆栈中，随时可以重新应用。
+
+储藏工作 git stash
+查看储藏列表 git stash list
+应用最近的储藏 git stash apply
+应用更早的储藏 git stash apply stash@{2}
+删除储藏git stash drop stash@{0}
+应用并删除储藏 git stash pop
 
 ### 自动部署 
+- `github` 上设置 `WebHook`
+- 项目中添加处理 `WebHook`的同步脚本 
+- 站点配置 
+- ....
