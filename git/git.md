@@ -134,8 +134,8 @@
   + `!` 表示不过虑
 ```shell
 # file_name ---.gitignore
-node_modules/* # 表示 过虑node_modules/ 或 /node_modules/* 文件夹里的所有文件 
-/node_modules/* # 过虑根目录下/node_modules/所有文件 
+node_modules/ # 表示 过虑node_modules/ 或 /node_modules/* 文件夹里的所有文件 
+/node_modules/ # 过虑根目录下/node_modules/所有文件 
 
 ```
 
