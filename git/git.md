@@ -42,28 +42,24 @@
   + 执行`git add`时,将工作区的修改更新到`stage`暂存区中,同时将修改的内容写到`objects`对象库中  
     - `git add .` 提交所有修改和新增的文件 
     - `git add -u` 只提交修改文件,不提交新增文件  
-    - `git checkout .` 放弃没有提交的所有修改  
-    - `git checkout xx.js` 放弃指定文件的修改  
-    - `git ls-files -s` 查看暂存区文件列表 
-    - `git cat-file -p 6e9a94` 查看暂存区文件内容   
-  + `git rm --cached <file>`时,直接从`stage`暂存区删除文件,工作区没影响  
-  + `git commit`时,将`stage`目录树写到`objects`对象库中`master`分支相应更新  
-    - 即提交时`master`分支的目录树是暂存区的目录树  
-  + `git checkout <file>`时，危险操作,用`stage`暂存区文件替换工作区文件 
-    - 会清除掉工作区中未添加到`stage`暂存区的改动  
-  + `git checkout HEAD <file>`时,危险操作,用`HEAD`指向的`master`分支中的文件替换暂存区和工作区的文件
-    - 会清除工作区中和暂存区中未提交的改变   
+  +  `git ls-files -s` 查看暂存区文件列表 
+  + `git cat-file -p 6e9a94` 查看暂存区文件内容   
+  + `git rm --cached <file>` 从`stage`暂存区删除文件,工作区没影响  
+  + `git commit` 将`stage`目录树更新到版本库`master`的`objects`对象中,提交时`master`的目录树是暂存区的目录树 
+  + `git checkout .` 危险操作,放弃没有提交的所有修改,用`stage`暂存区内容替换工作区内容   
+  + `git checkout <file>` 危险操作,用`stage`暂存区文件替换工作区文件  
+  + `git checkout HEAD <file>` 危险操作,用`HEAD`指向的`master`分支中的文件替换暂存区和工作区的文件  
 
 - 3.版本库: 由`git init`指令生成的`.git`目录,是`git`的版本库   
   + 版本库中`HEAD`指向的是一个`master`分支目录树  
-  + 版本库中，`objects`标识的是`git`的对象库，位于`.git/objects`目录下，包含各种创建对象和内容  
-  + `git reset HEAD`时，`stage`暂存区的目录树重写为`master`分支的目录树,工作区没影响  
+  + 版本库中`objects`标识的是`git`的对象库，位于`.git/objects`目录下,包含各种创建对象和内容  
+  + `git reset HEAD`时,`stage`暂存区的目录树重写为`master`分支的目录树,工作区没影响  
   + 使用`reset`恢复到历史提交点,重置暂存区与工作区的内容  
     - `git reset --hard` 清空工作区和暂存区的改动 
     - `git reset --hard HEAD^^^` 恢复前三个版本  
-    - `git reset --hard b7b73147ca8d6fc20e451d7b36` 恢复到指定提交版本  
-      + 先由`git log`指令获取版本号 
+    - `git reset --hard b7b73147ca8d6fc20e451d7b36` 恢复到指定提交版本,(由`git log`指令获取版本号)  
     - `git reset --soft` 保留工作区的内容,把文件差异放进暂存区  
+
 ### 分支管理 
 - 分支用于为项目增加新功能或修复Bug时使用 
 - 分支说明: 
