@@ -60,6 +60,18 @@
     - `git reset --hard b7b73147ca8d6fc20e451d7b36` 恢复到指定提交版本,(由`git log`指令获取版本号)  
     - `git reset --soft` 保留工作区的内容,把文件差异放进暂存区  
 
+- `git`修改已提交的 `commit` 注释 
+  + 两种情况基本相同,还没`push`到远程仓库和已经`push`到远远程仓库最后多一个`git push -f`步骤 
+  + 1.修改最后一次`commit`的注释  
+    - `git commit --amend`进入`vim`模式修改注释,然后按`:wq`退出 
+  + 2. 修改某次`commit`注释 
+    - `git rebase -i HEAD~2` 显示倒数的两次注释 
+    - 把注释前面的`pick`修改为`edit` 保存退出 
+    - `git commit --amend` 修改注释并保存退出 
+    - `git rebase --continue` 
+    - `git push origin master -f`
+
+
 ### 分支管理 
 - 分支用于为项目增加新功能或修复Bug时使用 
 - 分支说明: 
