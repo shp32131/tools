@@ -109,7 +109,7 @@
 
 - 2.添加远程仓库 
   + `git remote add origin https://github.com/shp32131/hansan.git` 
-  + `git remote add origin https://username:password@github.com/shp32131/hansan.git` 
+  + 添加用户名和密码 `git remote add origin https://username:password@github.com/shp32131/hansan.git`
 
 - 3.查看远程仓库 `git remote -v`
 
