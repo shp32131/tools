@@ -92,11 +92,12 @@
   + `git branch --merged` (在`master`分支上)查看已经合并的分支 
 
 ### 日志查看 
-- `git log` 查看日志 
+- `git log` 查看日志(不包括被删除的`commit`提交记录)
 - `git log -p -2` 查看最近2次提交日志并显示文件差异  
 - `git log --name-only` 显示已修改的文件清单 
 - `git log --name-status` 显示新增,修改,删除的文件清单 
 - `git log --name-oneline` 一行显示并只显示SHA-1的前几个字符 
+- `git reflog` 查看所有日志包括被`git reset --hard ...`删除的`commit`提交记录(可以恢复)  
 
 ### 效率提升 
 
