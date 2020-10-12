@@ -1,4 +1,5 @@
 ## 配置SSH  
+- 更新window系统的git 客户端 `git update-git-for-windows`
 - 大部分git服务器使用SSH公钥来进行授权，所以系统中每个用户都要提供一个公钥用于授权  
 - 1.在自己电脑端生成一个密钥和一个公钥,使用工具 `ssh_keygen`   
   - `linux`系统  
@@ -180,3 +181,15 @@ node_modules/ # 表示 过虑node_modules/ 或 /node_modules/* 文件夹里的�
 - 项目中添加处理 `WebHook`的同步脚本 
 - 站点配置 
 - ....
+### 其他
+``` shell
+git checkout -b main
+# Switched to a new branch 'main'
+git branch
+# * main
+#  master
+git merge master # 将master分支合并到main上
+# Already up to date.
+git pull origin main --allow-unrelated-histories # git pull origin main会报错：refusing to merge unrelated histories
+git push origin main
+```
